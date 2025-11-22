@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-color: #008080;
+    /* Classic Windows Teal */
+    --win-gray: #c0c0c0;
+    --win-gray-light: #dfdfdf;
+    --win-gray-dark: #808080;
+    --win-black: #000000;
+    --win-white: #ffffff;
+    --win-blue: #000080;
+    --font-main: 'Tahoma', 'Segoe UI', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: var(--font-main);
+    overflow: hidden;
+    user-select: none;
+}
+
+/* Retro Scrollbar */
+::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--win-gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--win-gray);
+    border: 1px solid var(--win-white);
+    box-shadow: inset 1px 1px var(--win-white), inset -1px -1px var(--win-gray-dark);
+}
+
+/* Utility for retro borders */
+.retro-border {
+    box-shadow: inset 1px 1px var(--win-white), inset -1px -1px var(--win-gray-dark),
+        inset 2px 2px var(--win-gray-light), inset -2px -2px var(--win-black);
+    background-color: var(--win-gray);
+}
+
+.retro-border-inset {
+    box-shadow: inset 1px 1px var(--win-gray-dark), inset -1px -1px var(--win-white),
+        inset 2px 2px var(--win-black), inset -2px -2px var(--win-gray-light);
+    background-color: var(--win-white);
+}
+
+.retro-button {
+    background-color: var(--win-gray);
+    box-shadow: inset 1px 1px var(--win-white), inset -1px -1px var(--win-gray-dark),
+        inset 2px 2px var(--win-gray-light), inset -2px -2px var(--win-black);
+    border: none;
+    padding: 4px 12px;
+    font-family: var(--font-main);
+    font-size: 14px;
+    color: var(--win-black);
+}
+
+.retro-button:active {
+    box-shadow: inset 1px 1px var(--win-black), inset -1px -1px var(--win-white),
+        inset 2px 2px var(--win-gray-dark), inset -2px -2px var(--win-gray-light);
+    padding: 5px 11px 3px 13px;
+}
