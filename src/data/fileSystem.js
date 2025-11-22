@@ -42,7 +42,7 @@ Feel free to explore my projects and get in touch via LinkedIn!`
                 id: 'stickyournotes',
                 type: 'link',
                 label: 'StickYourNotes',
-                icon: '/favicon.svg',
+                icon: '/stickyournotes_icon.svg',
                 action: 'link',
                 data: {
                     url: 'https://stickyournotes.com',
