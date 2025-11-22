@@ -1,17 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Shadow -->
-  <rect x="6" y="10" width="56" height="52" rx="4" fill="rgba(0,0,0,0.15)"/>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Monitor Casing -->
+  <rect x="2" y="4" width="28" height="22" rx="2" fill="#C0C0C0" stroke="#000000" stroke-width="2"/>
+  <rect x="4" y="26" width="24" height="4" fill="#C0C0C0" stroke="#000000" stroke-width="2"/>
   
-  <!-- Yellow sticky note body -->
-  <rect x="4" y="8" width="56" height="52" rx="4" fill="#fff740"/>
+  <!-- Screen -->
+  <rect x="5" y="7" width="22" height="16" fill="#008080" stroke="#808080" stroke-width="1"/>
   
-  <!-- Darker top bar for better visibility at small sizes -->
-  <rect x="4" y="8" width="56" height="16" rx="4" fill="#b8a018"/>
-  
-  <!-- Horizontal ruled lines -->
-  <line x1="6" y1="28" x2="58" y2="28" stroke="#5a4a08" stroke-width="1.2" stroke-dasharray="2,1.5" opacity="1"/>
-  <line x1="6" y1="36" x2="58" y2="36" stroke="#5a4a08" stroke-width="1.2" stroke-dasharray="2,1.5" opacity="1"/>
-  <line x1="6" y1="44" x2="58" y2="44" stroke="#5a4a08" stroke-width="1.2" stroke-dasharray="2,1.5" opacity="1"/>
-  <line x1="6" y1="52" x2="58" y2="52" stroke="#5a4a08" stroke-width="1.2" stroke-dasharray="2,1.5" opacity="1"/>
+  <!-- Letter 'e' -->
+  <text x="16" y="20" font-family="Tahoma, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">e</text>
 </svg>
-
