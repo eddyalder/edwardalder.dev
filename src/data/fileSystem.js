@@ -48,6 +48,17 @@ Feel free to explore my projects and get in touch via LinkedIn!`
                     url: 'https://stickyournotes.com',
                     name: 'StickYourNotes'
                 }
+            },
+            {
+                id: 'arrowops',
+                type: 'link',
+                label: 'Arrow Ops',
+                icon: '/arrowops_icon.png',
+                action: 'link',
+                data: {
+                    url: 'https://www.arrowops.dev',
+                    name: 'Arrow Ops'
+                }
             }
         ]
     }
