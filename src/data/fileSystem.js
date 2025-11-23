@@ -59,6 +59,17 @@ Feel free to explore my projects and get in touch via LinkedIn!`
                     url: 'https://www.arrowops.dev',
                     name: 'Arrow Ops'
                 }
+            },
+            {
+                id: 'numbit',
+                type: 'link',
+                label: 'Numbit',
+                icon: '/numbit_icon.svg',
+                action: 'link',
+                data: {
+                    url: 'https://www.numbit.dev/',
+                    name: 'Numbit'
+                }
             }
         ]
     }
