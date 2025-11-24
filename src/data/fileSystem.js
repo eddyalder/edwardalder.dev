@@ -81,4 +81,12 @@ Feel free to explore my projects and get in touch via LinkedIn!`
         content: null,
         desktop: false
     }
+    ,
+    {
+        id: 'browser',
+        type: 'browser',
+        label: 'Internet Explorer',
+        icon: '/internet_icon.png',
+        content: null
+    }
 ];

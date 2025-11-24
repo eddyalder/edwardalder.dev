@@ -4,6 +4,7 @@ import Modal from './Modal';
 import Window from './Window';
 import SystemProperties from './SystemProperties';
 import StartMenu from './StartMenu';
+import Browser from './Browser';
 import { fileSystem } from '../data/fileSystem';
 
 const Desktop = () => {
@@ -70,7 +71,7 @@ const Desktop = () => {
                     setModalState(prev => ({ ...prev, isOpen: false }));
                 }
             });
-        } else if (item.type === 'folder' || item.type === 'text' || item.type === 'system') {
+        } else if (item.type === 'folder' || item.type === 'text' || item.type === 'system' || item.type === 'browser') {
             if (!openWindows.find(w => w.id === item.id)) {
                 setOpenWindows([...openWindows, item]);
             }
@@ -115,11 +116,18 @@ const Desktop = () => {
                         onClose={() => handleCloseWindow(item.id)}
                         zIndex={activeWindowId === item.id ? 10 : 1}
                         onFocus={() => setActiveWindowId(item.id)}
+                        initialWidth={item.type === 'browser' ? '98%' : 400}
+                        initialHeight={item.type === 'browser' ? '92%' : 300}
+                        hideMenu={item.type === 'browser'}
+                        hideStatus={item.type === 'browser'}
+                        noPadding={item.type === 'browser'}
                     >
                         {item.type === 'folder' ? (
                             renderIcons(item.children || [], 'window')
                         ) : item.type === 'system' ? (
                             <SystemProperties />
+                        ) : item.type === 'browser' ? (
+                            <Browser />
                         ) : (
                             <textarea
                                 className="w-full h-full min-h-[200px] resize-none border-none outline-none font-mono text-sm p-1"

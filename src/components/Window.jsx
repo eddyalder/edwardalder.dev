@@ -1,11 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
 import DesktopIcon from './DesktopIcon';
 
-const Window = ({ title, children, onClose, isOpen, zIndex, onFocus, icon }) => {
+const Window = ({ title, children, onClose, isOpen, zIndex, onFocus, icon, initialWidth = 400, initialHeight = 300, hideMenu = false, hideStatus = false, noPadding = false }) => {
     const [position, setPosition] = useState(() => {
-        const width = Math.min(window.innerWidth * 0.9, 400);
-        const height = 300;
+        let width, height;
+
+        if (typeof initialWidth === 'string' && initialWidth.endsWith('%')) {
+            width = window.innerWidth * (parseFloat(initialWidth) / 100);
+        } else {
+            width = Math.min(window.innerWidth * 0.9, initialWidth);
+        }
+
+        if (typeof initialHeight === 'string' && initialHeight.endsWith('%')) {
+            height = window.innerHeight * (parseFloat(initialHeight) / 100);
+        } else {
+            height = initialHeight;
+        }
+
         const offset = Math.floor(Math.random() * 40) - 20; // -20 to +20
+
+        // If percentages are used, center exactly without random offset
+        if (typeof initialWidth === 'string' && initialWidth.endsWith('%')) {
+            return {
+                x: (window.innerWidth - width) / 2,
+                y: (window.innerHeight - height) / 2
+            };
+        }
+
         return {
             x: Math.max(0, (window.innerWidth - width) / 2 + offset),
             y: Math.max(0, (window.innerHeight - height) / 2 + offset - 100)
@@ -61,7 +82,9 @@ const Window = ({ title, children, onClose, isOpen, zIndex, onFocus, icon }) => 
             style={{
                 zIndex,
                 left: position.x,
-                top: position.y
+                top: position.y,
+                width: typeof initialWidth === 'string' ? initialWidth : (position.width || 'auto'),
+                height: typeof initialHeight === 'string' ? initialHeight : 'auto'
             }}
             onMouseDown={onFocus}
         >
@@ -84,24 +107,30 @@ const Window = ({ title, children, onClose, isOpen, zIndex, onFocus, icon }) => 
             </div>
 
             {/* Menu Bar (Visual only) */}
-            <div className="flex gap-4 px-2 py-1 text-sm mb-2 border-b border-white shadow-[0_1px_0_#808080]">
-                <span><span className="underline">F</span>ile</span>
-                <span><span className="underline">E</span>dit</span>
-                <span><span className="underline">V</span>iew</span>
-                <span><span className="underline">H</span>elp</span>
-            </div>
+            {!hideMenu && (
+                <div className="flex gap-4 px-2 py-1 text-sm mb-2 border-b border-white shadow-[0_1px_0_#808080]">
+                    <span><span className="underline">F</span>ile</span>
+                    <span><span className="underline">E</span>dit</span>
+                    <span><span className="underline">V</span>iew</span>
+                    <span><span className="underline">H</span>elp</span>
+                </div>
+            )}
 
             {/* Content Area */}
-            <div className="flex-1 bg-white border-2 border-gray-500 border-b-white border-r-white shadow-inner p-4 overflow-auto">
-                <div className="flex flex-wrap content-start gap-2">
-                    {children}
-                </div>
+            <div className={`flex-1 bg-white border-2 border-gray-500 border-b-white border-r-white shadow-inner ${noPadding ? '' : 'p-4'} overflow-auto`} style={{ height: initialHeight }}>
+                {noPadding ? children : (
+                    <div className="flex flex-wrap content-start gap-2">
+                        {children}
+                    </div>
+                )}
             </div>
 
             {/* Status Bar */}
-            <div className="mt-1 px-2 py-0.5 text-xs border-t border-gray-500 shadow-[0_1px_0_#fff]">
-                {React.Children.count(children)} object(s)
-            </div>
+            {!hideStatus && (
+                <div className="mt-1 px-2 py-0.5 text-xs border-t border-gray-500 shadow-[0_1px_0_#fff]">
+                    {React.Children.count(children)} object(s)
+                </div>
+            )}
         </div>
     );
 };
