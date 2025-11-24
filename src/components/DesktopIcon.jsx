@@ -27,7 +27,7 @@ const DesktopIcon = ({ icon, label, onDoubleClick, variant = 'desktop' }) => {
             <div className="w-12 h-12 mb-1 flex items-center justify-center">
                 {/* If icon is a string, assume it's an image URL. If it's a component, render it. */}
                 {typeof icon === 'string' ? (
-                    <img src={icon} alt={label} className="w-full h-full object-contain pixelated" />
+                    <img src={icon} alt="" className="w-full h-full object-contain pixelated" />
                 ) : (
                     icon
                 )}

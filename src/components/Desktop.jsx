@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DesktopIcon from './DesktopIcon';
 import Modal from './Modal';
 import Window from './Window';
+import SystemProperties from './SystemProperties';
+import StartMenu from './StartMenu';
 import { fileSystem } from '../data/fileSystem';
 
 const Desktop = () => {
@@ -14,6 +16,7 @@ const Desktop = () => {
 
     const [openWindows, setOpenWindows] = useState([]);
     const [activeWindowId, setActiveWindowId] = useState(null);
+    const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
 
     const openModal = (title, message, onConfirm) => {
         setModalState({
@@ -32,6 +35,16 @@ const Desktop = () => {
     };
 
     const handleItemClick = (item) => {
+        // Handle string IDs for Start Menu items
+        if (typeof item === 'string') {
+            const foundItem = fileSystem.find(i => i.id === item);
+            if (foundItem) {
+                item = foundItem;
+            } else {
+                return; // Item not found
+            }
+        }
+
         if (item.type === 'file' && item.action === 'download') {
             setModalState({
                 isOpen: true,
@@ -57,7 +70,7 @@ const Desktop = () => {
                     setModalState(prev => ({ ...prev, isOpen: false }));
                 }
             });
-        } else if (item.type === 'folder' || item.type === 'text') {
+        } else if (item.type === 'folder' || item.type === 'text' || item.type === 'system') {
             if (!openWindows.find(w => w.id === item.id)) {
                 setOpenWindows([...openWindows, item]);
             }
@@ -88,7 +101,7 @@ const Desktop = () => {
         <div className="w-full h-screen relative overflow-hidden flex flex-col items-start p-4">
             {/* Desktop Icons */}
             <div className="flex flex-col flex-wrap h-[calc(100vh-40px)] content-start gap-2">
-                {renderIcons(fileSystem)}
+                {renderIcons(fileSystem.filter(item => item.desktop !== false))}
             </div>
 
             {/* Windows */}
@@ -105,6 +118,8 @@ const Desktop = () => {
                     >
                         {item.type === 'folder' ? (
                             renderIcons(item.children || [], 'window')
+                        ) : item.type === 'system' ? (
+                            <SystemProperties />
                         ) : (
                             <textarea
                                 className="w-full h-full min-h-[200px] resize-none border-none outline-none font-mono text-sm p-1"
@@ -125,9 +140,18 @@ const Desktop = () => {
                 onCancel={closeModal}
             />
 
+            <StartMenu
+                isOpen={isStartMenuOpen}
+                onClose={() => setIsStartMenuOpen(false)}
+                onOpenItem={handleItemClick}
+            />
+
             {/* Taskbar */}
             <div className="absolute bottom-0 left-0 right-0 h-10 bg-[#c0c0c0] border-t-2 border-white flex items-center px-2 shadow-[inset_0_1px_0_#fff] z-50">
-                <button className="flex items-center gap-1 px-2 py-1 bg-[#c0c0c0] border-2 border-white border-b-black border-r-black shadow-sm active:border-black active:border-b-white active:border-r-white active:shadow-none font-bold text-sm">
+                <button
+                    onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
+                    className={`flex items-center gap-1 px-2 py-1 border-2 border-white border-b-black border-r-black shadow-sm active:border-black active:border-b-white active:border-r-white active:shadow-none font-bold text-sm ${isStartMenuOpen ? 'bg-[#e0e0e0] border-black border-b-white border-r-white shadow-inner' : 'bg-[#c0c0c0]'}`}
+                >
                     <div className="w-4 h-4 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-sm"></div>
                     Start
                 </button>
@@ -147,11 +171,26 @@ const Desktop = () => {
                     })}
                 </div>
 
-                <div className="ml-auto border-2 border-gray-500 border-b-white border-r-white px-2 py-1 text-xs bg-[#c0c0c0] shadow-inner">
-                    {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                <div className="ml-auto border-2 border-gray-500 border-b-white border-r-white px-2 py-1 text-xs bg-[#c0c0c0] shadow-inner min-w-[70px] text-center">
+                    <Clock />
                 </div>
             </div>
         </div>
+    );
+};
+
+const Clock = () => {
+    const [time, setTime] = useState(new Date());
+
+    useEffect(() => {
+        const timer = setInterval(() => setTime(new Date()), 1000);
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
+        <span>
+            {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        </span>
     );
 };
 

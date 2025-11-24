@@ -22,9 +22,11 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: var(--font-main);
     overflow: hidden;
     user-select: none;
+    min-height: 100vh;
 }
 
 /* Retro Scrollbar */

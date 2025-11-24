@@ -72,5 +72,13 @@ Feel free to explore my projects and get in touch via LinkedIn!`
                 }
             }
         ]
+    },
+    {
+        id: 'system',
+        type: 'system',
+        label: 'System Properties',
+        icon: '/computer_icon.png',
+        content: null,
+        desktop: false
     }
 ];

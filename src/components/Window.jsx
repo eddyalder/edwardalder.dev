@@ -8,7 +8,7 @@ const Window = ({ title, children, onClose, isOpen, zIndex, onFocus, icon }) => 
         const offset = Math.floor(Math.random() * 40) - 20; // -20 to +20
         return {
             x: Math.max(0, (window.innerWidth - width) / 2 + offset),
-            y: Math.max(0, (window.innerHeight - height) / 2 + offset)
+            y: Math.max(0, (window.innerHeight - height) / 2 + offset - 100)
         };
     });
     const [isDragging, setIsDragging] = useState(false);
