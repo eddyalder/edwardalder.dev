@@ -7,7 +7,8 @@ const Browser = () => {
     const tabs = [
         { title: 'StickYourNotes', url: 'https://stickyournotes.com' },
         { title: 'Arrow Ops', url: 'https://www.arrowops.dev' },
-        { title: 'Numbit', url: 'https://www.numbit.dev/' }
+        { title: 'Numbit', url: 'https://www.numbit.dev/' },
+        { title: 'Chirpy', url: 'https://chirpy-self.vercel.app/' }
     ];
 
     const handleTabClick = (index) => {

@@ -70,6 +70,17 @@ Feel free to explore my projects and get in touch via LinkedIn!`
                     url: 'https://www.numbit.dev/',
                     name: 'Numbit'
                 }
+            },
+            {
+                id: 'chirpy',
+                type: 'link',
+                label: 'Chirpy',
+                icon: '/chirpy_icon.svg',
+                action: 'link',
+                data: {
+                    url: 'https://chirpy-self.vercel.app/',
+                    name: 'Chirpy'
+                }
             }
         ]
     },
