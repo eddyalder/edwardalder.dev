@@ -85,6 +85,25 @@ Feel free to explore my projects and get in touch via LinkedIn!`
         ]
     },
     {
+        id: 'apps',
+        type: 'folder',
+        label: 'Apps',
+        icon: '/folder.svg',
+        children: [
+            {
+                id: 'slm',
+                type: 'link',
+                label: 'SLM',
+                icon: '/slm_icon.png',
+                action: 'link',
+                data: {
+                    url: 'https://apps.apple.com/us/app/slm-sunday-league-manager/id6758503406',
+                    name: 'SLM'
+                }
+            }
+        ]
+    },
+    {
         id: 'system',
         type: 'system',
         label: 'System Properties',

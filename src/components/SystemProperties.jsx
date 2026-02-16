@@ -35,7 +35,7 @@ const SystemProperties = () => {
                             <div>
                                 <h3 className="font-bold mb-2">System:</h3>
                                 <p className="pl-4">Alder 2000</p>
-                                <p className="pl-4">Version 2025</p>
+                                <p className="pl-4">Version 2026</p>
                             </div>
                         </div>
 

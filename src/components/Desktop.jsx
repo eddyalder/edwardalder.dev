@@ -93,7 +93,7 @@ const Desktop = () => {
                 icon={item.icon}
                 label={item.label}
                 variant={variant}
-                onDoubleClick={() => handleItemClick(item)}
+                onClick={() => handleItemClick(item)}
             />
         ));
     };
